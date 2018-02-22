@@ -36,6 +36,7 @@ from .service import Service
 from .service_date import ServiceDate
 from .shape import ShapePoint, post_save_shapepoint
 from .stop import Stop, post_save_stop
+from .stop_external_id import StopExternalId
 from .stop_time import StopTime
 from .transfer import Transfer
 from .trip import Trip
@@ -89,8 +90,9 @@ class Feed(models.Model):
             filelist = zfile.namelist()
 
         gtfs_order = (
-            Agency, Stop, Route, Service, ServiceDate, ShapePoint, Trip,
-            StopTime, Frequency, Fare, FareRule, Transfer, FeedInfo,
+            Agency, Stop, StopExternalId, Route, Service, ServiceDate,
+            ShapePoint, Trip, StopTime, Frequency, Fare, FareRule, Transfer,
+            FeedInfo,
         )
         post_save.disconnect(dispatch_uid='post_save_shapepoint')
         post_save.disconnect(dispatch_uid='post_save_stop')
@@ -157,7 +159,7 @@ class Feed(models.Model):
 
         gtfs_order = (
             Agency, Service, ServiceDate, Fare, FareRule, FeedInfo, Frequency,
-            Route, ShapePoint, StopTime, Stop, Transfer, Trip,
+            Route, ShapePoint, StopTime, Stop, StopExternalId, Transfer, Trip,
         )
 
         for klass in gtfs_order:
