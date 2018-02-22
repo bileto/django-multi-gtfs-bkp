@@ -28,6 +28,7 @@ from .shape import Shape, ShapePoint
 from .stop import Stop
 from .stop_external_id import StopExternalId
 from .stop_time import StopTime
+from .stop_time_limitation import StopTimeLimitation
 from .transfer import Transfer
 from .trip import Trip
 from .zone import Zone
@@ -35,4 +36,5 @@ from .zone import Zone
 # pyflakes be quiet
 __models = (
     Agency, Block, Fare, FareRule, Feed, FeedInfo, Frequency, Route, Service,
-    ServiceDate, Shape, ShapePoint, Stop, StopExternalId, StopTime, Transfer, Trip, Zone)
+    ServiceDate, Shape, ShapePoint, Stop, StopExternalId, StopTime,
+    StopTimeLimitation, Transfer, Trip, Zone)
