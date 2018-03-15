@@ -381,7 +381,7 @@ class Base(models.Model):
                     # Get the lat or long from the point
                     name, index = point_match.groups()
                     field = getattr(obj, name)
-                    row.append(field.coords[int(index)])
+                    row.append(field.coords[int(index)] or None)
                 else:
                     # Handle other field types
                     field = getattr(obj, field_name) if obj else ''
