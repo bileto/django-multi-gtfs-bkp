@@ -64,13 +64,15 @@ class Feed(models.Model):
     ]
 
     @classmethod
-    def register_model(cls, klass):
-        cls._gtfs_order.append(klass)
+    def register_model(cls, *klass):
+        for k in klass:
+            cls._gtfs_order.append(k)
         return klass
 
     @classmethod
-    def unregister_model(cls, klass):
-        cls._gtfs_order.remove(klass)
+    def unregister_model(cls, *klass):
+        for k in klass:
+            cls._gtfs_order.remove(k)
 
     def __str__(self):
         if self.name:
