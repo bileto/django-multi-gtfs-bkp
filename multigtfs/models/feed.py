@@ -152,6 +152,16 @@ class Feed(models.Model):
             "Updated geometries for %d routes in %0.1f seconds",
             routes.count(), end_time - start_time)
 
+        # Update Route agency_id when only one agency in the feed
+        if len(Agency.objects.in_feed(self)) == 1:
+            agency = Agency.objects.get(feed_id=self)
+            routes = self.route_set.all(). \
+                         filter(agency_id__isnull=True)
+            routes_count = routes.update(agency_id=agency)
+            logger.info(
+                "Updated agency for %d routes",
+                routes_count)
+
         total_end = time.time()
         logger.info(
             "Import completed in %0.1f seconds.", total_end - total_start)
