@@ -57,7 +57,7 @@ class StopTime(Base):
         "shape distance traveled",
         null=True, blank=True,
         help_text='Distance of stop from start of shape')
-    extra_data = JSONField(default={}, blank=True, null=True)
+    extra_data = JSONField(default=dict, blank=True, null=True)
 
     def __str__(self):
         return "%s-%s-%s" % (self.trip, self.stop.stop_id, self.stop_sequence)

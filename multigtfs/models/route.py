@@ -65,7 +65,7 @@ class Route(Base):
     geometry = models.MultiLineStringField(
         null=True, blank=True,
         help_text='Geometry cache of Trips')
-    extra_data = JSONField(default={}, blank=True, null=True)
+    extra_data = JSONField(default=dict, blank=True, null=True)
 
     def update_geometry(self):
         """Update the geometry from the Trips"""

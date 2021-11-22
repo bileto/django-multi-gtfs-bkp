@@ -66,6 +66,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -85,3 +86,6 @@ STATIC_URL = '/static/'
 _env_test_runner = config('TEST_RUNNER', default='', cast=str)
 if _env_test_runner:
     TEST_RUNNER = _env_test_runner
+
+# Default automatically created primary key type
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

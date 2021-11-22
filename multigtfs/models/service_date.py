@@ -30,7 +30,7 @@ class ServiceDate(Base):
     exception_type = models.IntegerField(
         default=1, choices=((1, 'Added'), (2, 'Removed')),
         help_text="Is service added or removed on this date?")
-    extra_data = JSONField(default={}, blank=True, null=True)
+    extra_data = JSONField(default=dict, blank=True, null=True)
 
     def __str__(self):
         return (
