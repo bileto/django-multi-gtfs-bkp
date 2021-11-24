@@ -18,7 +18,7 @@ SECRET_KEY = config('SECRET_KEY', default=_default_secret_key, cast=str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost', cast=Csv())
 
 # Application definition
 INSTALLED_APPS = [
@@ -37,7 +37,7 @@ LOCAL_INSTALLED_APPS = list(config('LOCAL_INSTALLED_APPS',
                                    default='', cast=Csv()))
 INSTALLED_APPS.extend(LOCAL_INSTALLED_APPS)
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,6 +66,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -85,3 +86,6 @@ STATIC_URL = '/static/'
 _env_test_runner = config('TEST_RUNNER', default='', cast=str)
 if _env_test_runner:
     TEST_RUNNER = _env_test_runner
+
+# Default automatically created primary key type
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
