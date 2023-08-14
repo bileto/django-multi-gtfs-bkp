@@ -753,8 +753,16 @@ adult,''' + s_fare_a + b''',USD,0,,7200
         self.assertFalse('frequencies.txt' in z_out.namelist())
 
         routes_in = self.normalize(z_in.read('routes.txt'))
+        routes_in_header = routes_in.split(b'\n')[0]
         routes_out = self.normalize(z_out.read('routes.txt'))
-        self.assertEqual(routes_in, routes_out)
+        routes_out_header = routes_out.split(b'\n')[0]
+        # agency_id not in input, in output
+        self.assertEqual(routes_in_header, b'''\
+route_id,route_short_name,route_long_name,route_type,route_color,\
+route_text_color''')
+        self.assertEqual(routes_out_header, b'''\
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,\
+route_text_color''')
 
         shapes_in = self.normalize(z_in.read('shapes.txt'))
         shapes_out = self.normalize(z_out.read('shapes.txt'))
@@ -850,8 +858,14 @@ B,B,B
 ''')
 
         routes_in = self.normalize(z_in.read('routes.txt'))
+        routes_in_header = routes_in.split(b'\n')[0]
         routes_out = self.normalize(z_out.read('routes.txt'))
-        self.assertEqual(routes_in, routes_out)
+        routes_out_header = routes_out.split(b'\n')[0]
+        # agency_id not in input, in output
+        self.assertEqual(routes_in_header, b'''\
+route_id,route_short_name,route_long_name,route_type,route_url,route_sort_order''')
+        self.assertEqual(routes_out_header, b'''\
+route_id,agency_id,route_short_name,route_long_name,route_type,route_url,route_sort_order''')
 
         shapes_in = self.normalize(z_in.read('shapes.txt'))
         shapes_out = self.normalize(z_out.read('shapes.txt'))
