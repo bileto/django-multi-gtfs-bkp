@@ -16,12 +16,9 @@ from __future__ import unicode_literals
 
 from django.contrib.gis import admin
 
-from multigtfs.app_settings import MULTIGTFS_OSMADMIN
 from multigtfs.models import (
     Agency, Block, Fare, FareRule, Feed, FeedInfo, Frequency, Route, Service,
     ServiceDate, Shape, ShapePoint, Stop, StopTime, Transfer, Trip, Zone)
-
-geo_admin = admin.OSMGeoAdmin if MULTIGTFS_OSMADMIN else admin.GeoModelAdmin
 
 
 class AgencyAdmin(admin.ModelAdmin):
@@ -48,7 +45,7 @@ class FrequencyAdmin(admin.ModelAdmin):
     raw_id_fields = ('trip', )
 
 
-class RouteAdmin(geo_admin):
+class RouteAdmin(admin.GISModelAdmin):
     raw_id_fields = ('feed', 'agency')
 
 
@@ -60,15 +57,15 @@ class ServiceDateAdmin(admin.ModelAdmin):
     raw_id_fields = ('service', )
 
 
-class ShapeAdmin(geo_admin):
+class ShapeAdmin(admin.GISModelAdmin):
     raw_id_fields = ('feed', )
 
 
-class ShapePointAdmin(geo_admin):
+class ShapePointAdmin(admin.GISModelAdmin):
     raw_id_fields = ('shape', )
 
 
-class StopAdmin(geo_admin):
+class StopAdmin(admin.GISModelAdmin):
     raw_id_fields = ('feed', 'zone', 'parent_station')
 
 
@@ -80,7 +77,7 @@ class TransferAdmin(admin.ModelAdmin):
     raw_id_fields = ('from_stop', 'to_stop')
 
 
-class TripAdmin(geo_admin):
+class TripAdmin(admin.GISModelAdmin):
     raw_id_fields = ('route', 'service', 'block', 'shape')
 
 
